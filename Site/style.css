@@ -1,0 +1,901 @@
+/* ==========================================================================
+   DSC SHOP — Identidade visual AV3
+   Tema: showroom automotivo premium (azul elétrico + fundo claro)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #f4f7fb;
+    --bg-2: #e9eef7;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --ink: #0f172a;
+    --ink-soft: #475569;
+    --muted: #94a3b8;
+    --line: #e2e8f0;
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --accent-soft: #dbeafe;
+    --nav: #0b1220;
+    --nav-2: #16233d;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    --shadow-hover: 0 20px 45px rgba(15, 23, 42, 0.16);
+    --radius: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 15% 0%, rgba(37, 99, 235, 0.09), transparent 42%),
+        radial-gradient(circle at 85% 10%, rgba(14, 165, 233, 0.07), transparent 38%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Baloo 2', cursive;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+a:hover {
+    color: var(--accent-dark);
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+::selection {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   FUNDO INTERATIVO
+   -------------------------------------------------------------------------- */
+
+/* Mantém o conteúdo na frente da camada animada. */
+body > header,
+body > main,
+body > footer {
+    position: relative;
+    z-index: 1;
+}
+
+.bg-interativo {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.bg-blobs,
+.bg-grade,
+.bg-particulas {
+    position: absolute;
+    inset: -40px;
+    pointer-events: none;
+}
+
+.bg-blobs {
+    will-change: transform;
+    transition: transform 0.25s ease-out;
+}
+
+.bg-blob {
+    position: absolute;
+    display: block;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.32;
+    animation: bg-flutuar 18s ease-in-out infinite alternate;
+}
+
+.bg-blob-1 { width: 420px; height: 420px; top: -110px; left: -90px; animation-duration: 19s; }
+.bg-blob-2 { width: 340px; height: 340px; top: 22%; right: -80px; animation-duration: 23s; animation-delay: -6s; }
+.bg-blob-3 { width: 460px; height: 460px; bottom: -170px; left: 28%; animation-duration: 27s; animation-delay: -11s; }
+.bg-blob-4 { width: 260px; height: 260px; top: 48%; left: -60px; animation-duration: 21s; animation-delay: -3s; opacity: 0.22; }
+.bg-blob-5 { width: 300px; height: 300px; bottom: 6%; right: 12%; animation-duration: 25s; animation-delay: -14s; opacity: 0.2; }
+
+@keyframes bg-flutuar {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(35px, -28px, 0) scale(1.08); }
+    100% { transform: translate3d(-25px, 35px, 0) scale(0.96); }
+}
+
+.bg-grade {
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(37, 99, 235, 0.22) 1px, transparent 1.5px);
+    background-size: 34px 34px;
+    background-position: 50% 50%;
+    opacity: 0.55;
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+.bg-particulas {
+    inset: 0;
+}
+
+.bg-particula {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.28;
+    box-shadow: 0 0 14px 4px rgba(37, 99, 235, 0.25);
+    will-change: transform;
+    animation: bg-piscar 4s ease-in-out infinite alternate;
+}
+
+@keyframes bg-piscar {
+    from { opacity: 0.12; }
+    to   { opacity: 0.42; }
+}
+
+.bg-ripple {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    border: 2px solid rgba(37, 99, 235, 0.6);
+    border-radius: 50%;
+    animation: bg-onda 900ms ease-out forwards;
+}
+
+@keyframes bg-onda {
+    from { transform: scale(0.3); opacity: 0.7; }
+    to   { transform: scale(9); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bg-blob,
+    .bg-particula,
+    .bg-ripple {
+        animation: none;
+    }
+
+    .bg-blobs {
+        transition: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   CABEÇALHO / NAVEGAÇÃO
+   -------------------------------------------------------------------------- */
+
+header {
+    padding: 0;
+}
+
+.navbar.bg-dark {
+    background: linear-gradient(100deg, var(--nav) 0%, var(--nav-2) 100%) !important;
+    border-bottom: 3px solid var(--accent);
+    box-shadow: 0 10px 30px rgba(11, 18, 32, 0.35);
+    padding: 12px 5%;
+}
+
+.navbar-brand img {
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.04);
+}
+
+.navbar.bg-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.78);
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.09em;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 0 3px;
+    transition: all 0.25s ease;
+}
+
+.navbar.bg-dark .navbar-nav .nav-link:hover,
+.navbar.bg-dark .navbar-nav .nav-link.active {
+    color: #fff;
+    background: rgba(37, 99, 235, 0.22);
+}
+
+.navbar.bg-dark .navbar-nav .nav-link.active {
+    box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.badge-carrinho {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+#user-info {
+    background: linear-gradient(135deg, #fff, #e8eefb);
+    color: var(--ink);
+    border: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 9px 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-menu {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-hover);
+    padding: 8px;
+}
+
+.dropdown-item {
+    border-radius: 9px;
+    font-size: 0.9rem;
+    padding: 9px 12px;
+}
+
+.dropdown-item:hover {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+}
+
+/* --------------------------------------------------------------------------
+   CONTEÚDO PRINCIPAL
+   -------------------------------------------------------------------------- */
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto 60px;
+}
+
+section {
+    margin-bottom: 34px;
+}
+
+main > section > h1 {
+    font-size: 2.5rem;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+}
+
+main > section > h1::after {
+    content: "";
+    display: block;
+    width: 62px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent), #38bdf8);
+    margin-top: 10px;
+}
+
+main > section > p {
+    color: var(--ink-soft);
+    margin-bottom: 26px;
+}
+
+footer {
+    text-align: center;
+    padding: 28px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   FORMULÁRIOS (login / cadastro)
+   -------------------------------------------------------------------------- */
+
+.formulario,
+.container-form,
+.box,
+main form {
+    width: min(100%, 460px);
+    margin: 10px auto;
+    padding: 38px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+main form::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--accent), #38bdf8, var(--accent));
+}
+
+form h1, form h2 {
+    text-align: center;
+    margin: 0 0 8px;
+    font-size: 2.1rem;
+}
+
+form p {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px 15px;
+    margin-bottom: 18px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-2);
+    color: var(--ink);
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+input::placeholder {
+    color: var(--muted);
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.input_texto {
+    font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   BOTÕES
+   -------------------------------------------------------------------------- */
+
+button,
+input[type="submit"],
+.btn,
+.btn_enviar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.28);
+    transition: all 0.25s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+.btn:hover,
+.btn_enviar:hover {
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.36);
+}
+
+button:active,
+input[type="submit"]:active,
+.btn:active {
+    transform: translateY(0);
+}
+
+button:disabled,
+input[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+form button,
+form input[type="submit"] {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.btn-secundario {
+    background: #e9eef6;
+    color: var(--ink-soft);
+    box-shadow: none;
+}
+
+.btn-secundario:hover {
+    background: #dbe3f0;
+    color: var(--ink);
+    box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   TABELAS
+   -------------------------------------------------------------------------- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th {
+    background: var(--ink);
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+}
+
+tr:hover td {
+    background: var(--accent-soft);
+}
+
+/* --------------------------------------------------------------------------
+   MENSAGENS / ALERTAS
+   -------------------------------------------------------------------------- */
+
+.alert,
+.mensagem {
+    padding: 14px 18px;
+    margin: 15px 0;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    border: 1px solid #bfdbfe;
+}
+
+.card, .cartao, .painel {
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.card:hover, .cartao:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* --------------------------------------------------------------------------
+   BARRA DE FILTROS
+   -------------------------------------------------------------------------- */
+
+.barra-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.campo-filtro {
+    flex: 1 1 170px;
+    min-width: 150px;
+}
+
+.campo-filtro label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.78rem;
+}
+
+.barra-filtros input,
+.barra-filtros select {
+    margin-bottom: 0;
+}
+
+.campo-busca {
+    flex: 2 1 230px;
+}
+
+.acoes-filtro {
+    display: flex;
+    gap: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   VITRINE DE PRODUTOS
+   -------------------------------------------------------------------------- */
+
+.lista-estoque {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 26px;
+    margin-top: 28px;
+}
+
+.produto-estoque {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.produto-estoque::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #38bdf8);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+.produto-estoque:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: #bfdbfe;
+}
+
+.produto-estoque:hover::before {
+    transform: scaleX(1);
+}
+
+.produto-estoque img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    padding: 6px;
+}
+
+.produto-estoque .sem-imagem {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+    color: var(--ink-soft);
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.produto-estoque h2 {
+    font-size: 1.3rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    min-height: 2.4em;
+}
+
+.produto-estoque p {
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+}
+
+.produto-estoque .preco {
+    color: var(--accent-dark);
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin: 12px 0 4px;
+}
+
+.produto-estoque .quantidade {
+    background: var(--surface-2);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+.acoes-produto {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+}
+
+.qtd-compra {
+    width: 72px;
+    flex: 0 0 72px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px 6px;
+    font-weight: 700;
+}
+
+.btn-comprar {
+    flex: 1;
+    padding: 11px 10px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+}
+
+.sem-produtos {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px dashed #cbd5e1;
+}
+
+/* --------------------------------------------------------------------------
+   PAGINAÇÃO
+   -------------------------------------------------------------------------- */
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 36px;
+}
+
+.info-pagina {
+    font-weight: 700;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 20px;
+    box-shadow: var(--shadow);
+}
+
+/* --------------------------------------------------------------------------
+   CARRINHO E HISTÓRICO DE COMPRAS
+   -------------------------------------------------------------------------- */
+
+.lista-compras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.carrinho-item,
+.compra-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carrinho-item:hover,
+.compra-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.carrinho-item h2,
+.compra-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+}
+
+.carrinho-item p,
+.compra-card p {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+}
+
+.compra-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 14px;
+}
+
+.compra-cabecalho span {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.compra-itens {
+    margin: 18px 0;
+    padding-left: 22px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+.compra-itens li {
+    margin-bottom: 8px;
+}
+
+.compra-itens li::marker {
+    color: var(--accent);
+}
+
+.carrinho-item .preco,
+.compra-card .preco,
+.total-carrinho {
+    color: var(--accent-dark);
+    font-weight: 800;
+}
+
+.total-carrinho {
+    margin-top: 26px;
+    font-size: 1.5rem;
+    display: inline-block;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 22px;
+    box-shadow: var(--shadow);
+}
+
+.total-carrinho:empty {
+    display: none;
+}
+
+.acoes-carrinho {
+    margin-top: 12px;
+    max-width: 320px;
+}
+
+.acoes-carrinho button {
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   TOAST
+   -------------------------------------------------------------------------- */
+
+.toast {
+    border-radius: 14px !important;
+    box-shadow: var(--shadow-hover) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVIDADE
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 992px) {
+    main {
+        width: 94%;
+        margin: 30px auto 50px;
+    }
+
+    main > section > h1 {
+        font-size: 2.1rem;
+    }
+
+    .lista-estoque {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar.bg-dark {
+        padding: 10px 4%;
+    }
+
+    .navbar-brand img {
+        height: 70px !important;
+    }
+
+    .navbar.bg-dark .navbar-nav .nav-link {
+        padding: 9px 12px;
+        font-size: 0.78rem;
+    }
+
+    main {
+        width: 95%;
+        margin: 24px auto 40px;
+    }
+
+    main > section > h1 {
+        font-size: 1.8rem;
+    }
+
+    .formulario, .container-form, .box, main form {
+        padding: 26px 22px;
+        border-radius: 18px;
+    }
+
+    .barra-filtros {
+        padding: 18px;
+    }
+
+    .campo-filtro,
+    .campo-busca,
+    .acoes-filtro,
+    .acoes-filtro button {
+        width: 100%;
+    }
+
+    .lista-estoque,
+    .lista-compras {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    button, input[type="submit"], .btn, .btn_enviar {
+        max-width: 100%;
+    }
+
+    .total-carrinho {
+        display: block;
+        text-align: center;
+    }
+}
